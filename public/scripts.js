@@ -16,6 +16,7 @@ async function populateRestaurants(){
         appendItem.innerHTML = `
         <article class="tile is-child box has-background-link-dark ">
         <span class="subtitle has-text-light has-text-weight-bold ">
+        <tbody>
         ${restaurant["hall_name"]}</span>
         <br />
         <span class="has-text-light">
