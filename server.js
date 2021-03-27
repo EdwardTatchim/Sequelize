@@ -7,11 +7,16 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+//creating static variable
+const staticFolder = 'public';
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+
 //Adding a static folder
-app.use(express.static("public"));
+app.use(express.static(staticFolder));
 
 app.use('/api', apiRoutes);
 
