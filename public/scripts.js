@@ -7,12 +7,12 @@
 
 async function populateRestaurants(){
 
-    const diningRequest = await fetch('/api/meals');
+    const diningRequest = await fetch('/api/DiningHall');
     const diningData = await diningRequest.json();
 
     diningData.data.forEach(restaurant => {
         const appendItem = document.createElement('div');
-        appendItem.classList.add('title', 'has-text-centered', 'is-parent', 'is-3');
+        appendItem.classList.add('hall_id', 'hall_name', 'hall_location', 'is-3');
         appendItem.innerHTML = `
         <article class="tile is-child box has-background-link-dark ">
         <span class="subtitle has-text-light has-text-weight-bold ">
@@ -36,7 +36,7 @@ async function populateRestaurants(){
 
 async function getData(){
     console.log('data request');
-    const diningRequest = await fetch('/api/meals');
+    const diningRequest = await fetch('/api/DiningHall');
     const diningData = await diningRequest.json();
     return diningData;
 
