@@ -5,32 +5,30 @@
 
 //This function fetches all dining halls and then populates the nearby restaurants on the home page
 
-async function populateRestaurants(){
+async function populateRestaurants(diningData){
 
-    const diningRequest = await fetch('/api/dining');
-    const diningData = await diningRequest.json();
+    //const diningRequest = await fetch('/api/dining');
+    //const diningData = await diningRequest.json();
+    //console.log(diningData);
+    const targetBox = document.querySelector('tbody');
 
     diningData.data.forEach((restaurant) => {
-        const appendItem = document.createElement("div");
-        appendItem.classList.add("tile", "has-text-centered", "is-parent", "is-3");
+        const appendItem = document.createElement("tr");
+        //appendItem.classList.add("tile", "has-text-centered", "is-parent", "is-3");
         appendItem.innerHTML = `
-        <article class="tile is-child box has-background-link-dark ">
-        <span class="subtitle has-text-light has-text-weight-bold ">
-        <tbody>
-        ${restaurant["hall_name"]}</span>
-        <br />
-        <span class="has-text-light">
-        ${restaurant["hall_address"].split(',')[0]}   
-        </span>
-        <br/>
-        <span class="has-text-light">
-        ${restaurant.hall_address.split(',')[1]}
-        </span>
-        </article>`;
+
+            <td>${restaurant.hall_id}</td>
+            <td>${restaurant.hall_name}</td>
+            <td>${restaurant.hall_address}</td>
+            
+            `;
         targetBox.append(appendItem);
 
         
     });
+
+    // console.log(diningData);
+    // console.table(diningData);
 
 }
 
@@ -72,6 +70,9 @@ async function windowActions(){
     const storedDinnerData = JSON.parse(storedDinner);
     console.log(storedDinner);
     console.log(storedDinnerData);
+    populateRestaurants(storedDinnerData);
+
+
 
 }
 
