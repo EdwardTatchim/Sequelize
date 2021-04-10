@@ -1,9 +1,17 @@
-//make request to line 12
-//three functions
-//-get dinning data - 2 constants per request and data
-//-windows action function - 
 
-//This function fetches all dining halls and then populates the nearby restaurants on the home page
+function getRandomIntInclusive(min, max){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1) + min); //The maximum and minimum are inclusive
+}
+
+
+async function getMeals(){
+    console.log('data request');
+    const diningRequest = await fetch('/api/wholeMeal');
+    const diningData = await diningRequest.json();
+    return diningData;
+}
 
 async function populateRestaurants(diningData){
 
@@ -17,9 +25,17 @@ async function populateRestaurants(diningData){
         //appendItem.classList.add("tile", "has-text-centered", "is-parent", "is-3");
         appendItem.innerHTML = `
 
-            <td>${restaurant.hall_id}</td>
-            <td>${restaurant.hall_name}</td>
-            <td>${restaurant.hall_address}</td>
+            <td>${restaurant.meal_id}</td>
+            <td>${restaurant.meal_name}</td>
+            <td>${restaurant.meal_category}</td>
+            <td>${restaurant.macro_id}</td>
+            <td>${restaurant.calories}</td>
+            <td>${restaurant.serving_size}</td>
+            <td>${restaurant.cholesterol}</td>
+            <td>${restaurant.sodium}</td>
+            <td>${restaurant.carbs}</td>
+            <td>${restaurant.protein}</td>
+            <td>${restaurant.fat}</td>
             
             `;
         targetBox.append(appendItem);
@@ -33,11 +49,19 @@ async function populateRestaurants(diningData){
 }
 
 
-async function getDining(){
-    console.log('data request');
-    const diningRequest = await fetch('/api/dining');
-    const diningData = await diningRequest.json();
-    return diningData;
+async function windowActions(){
+    console.log('loaded window');
+    const results = await getMeals();
+    const meals = results.data;
+    
+    const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const selectedMeals = mealArray.map(element =>{ //.map replaces for loop. It is a disguised for each loop
+        const random = getRandomIntInclusive(0, meals.length -1);
+        return meals[random];
+    });
+
+    console.table(selectedMeals);
+
 
 }
 
@@ -56,7 +80,7 @@ function setComplexData(data){
 
 async function windowActions(){
     console.log('loaded window');
-    const dining = await getDining();
+    const dining = await getMeals();
     //console.table(dining);
 
 
@@ -75,5 +99,4 @@ async function windowActions(){
 
 
 }
-
 window.onload = windowActions;
