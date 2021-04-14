@@ -10,7 +10,67 @@ async function getMeals(){
     console.log('data request');
     const diningRequest = await fetch('/api/wholeMeal');
     const diningData = await diningRequest.json();
-    return diningData;
+
+    const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const selectedMeals = mealArray.map(element =>{ //.map replaces for loop. It is a disguised for each loop
+        
+        const random = getRandomIntInclusive(0, meals.length -1);
+        return meals[random];
+    });
+
+    const chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Meals and Macros"
+        },
+        axisX: {
+            valueFormatString: "DD"
+        },
+        axisY: {
+            prefix: "$"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend:{
+            cursor: "pointer",
+            itemclick: toggleDataSeries
+        },
+        data: [{
+            type: "stackedBar",
+            name: "Meals",
+            showInLegend: "true",
+            xValueFormatString: "DD, MMM",
+            yValueFormatString: "$#,##0",
+            dataPoints: [
+                { x:[ 'meal_id', 'meal_name', 'meal_category' ], y: 56 }
+            ]
+        },
+
+        {
+            type: "stackedBar",
+            name: "Macro",
+            showInLegend: "true",
+            xValueFormatString: "DD, MMM",
+            yValueFormatString: "$#,##0",
+            dataPoints: [
+                { x:[ 'meal_id', 'meal_name', 'meal_category' ], y: 56  }
+         
+            ]
+        }]
+    });
+    chart.render();
+
+    function toggleDataSeries(e) {
+        if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else {
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+    
 }
 
 async function populateRestaurants(diningData){
@@ -43,25 +103,8 @@ async function populateRestaurants(diningData){
         
     });
 
-    // console.log(diningData);
-    // console.table(diningData);
-
-}
-
-
-async function windowActions(){
-    console.log('loaded window');
-    const results = await getMeals();
-    const meals = results.data;
-    
-    const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const selectedMeals = mealArray.map(element =>{ //.map replaces for loop. It is a disguised for each loop
-        const random = getRandomIntInclusive(0, meals.length -1);
-        return meals[random];
-    });
-
-    console.table(selectedMeals);
-
+    //console.log(diningData);
+    //console.table(diningData);
 
 }
 
@@ -80,23 +123,15 @@ function setComplexData(data){
 
 async function windowActions(){
     console.log('loaded window');
-    const dining = await getMeals();
-    //console.table(dining);
-
-
-    //unrelated
-    // setBasicData();
-    // const cat = getBasicData();
-    // console.log(cat);
-
-    setComplexData(dining);
-    const storedDinner = localStorage.getItem('data');
-    const storedDinnerData = JSON.parse(storedDinner);
-    console.log(storedDinner);
-    console.log(storedDinnerData);
-    populateRestaurants(storedDinnerData);
+    const results = await getMeals();
+    const meals = results.data;
+    
+    setComplexData(selectedMeals);
+    populateRestaurants(selectedMeals);
+    console.table(selectedMeals);
 
 
 
 }
+
 window.onload = windowActions;

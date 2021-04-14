@@ -9,34 +9,44 @@
     
 </head>
 <body>
-    <h1 class="title is-1" style="text-align:center"> 
-    <strong> Edward Tatchim's Lab 10 </strong></h1>
-    <h2 class="title is-2" style="text-align:center"> <strong> Meal Retrieval </strong></h2>
-    <div id="chart"></div>
-    <table class="table is-bordered is-fullwidth" style="text-align:center" id="meals">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA==" crossorigin="anonymous"></script>
+  
+  <div class="container-box">
+      <h1 class="title is-1" style="text-align:center"> 
+      <strong> Edward Tatchim's Lab 10 </strong></h1>
+      <h2 class="title is-2" style="text-align:center"> <strong> Meal Retrieval </strong></h2>
 
-      <thead>
-        <tr>
+      <div class="chartContainer" id="chartContainer">
+
+      </div>
+    
+      <table class="table is-bordered is-fullwidth" style="text-align:center" id="meals">
+
+          <thead>
+            <tr>
+              
+              <th><abbr title="meal_id">Meal Id</abbr></th>
+              <th> <abbr title="meal_name">Meal Name</abbr></th>
+              <th><abbr title="meal_category"></abbr>Meal Category</abbr></th>
+              <!----
+              <th> <abbr title="macro_id">Macro Id</abbr></th>
+              <th> <abbr title="calories">Calories</abbr></th>
+              <th> <abbr title="serving_size">Serving Size</abbr></th>
+              <th> <abbr title="Cholesterol">Cholesterol</abbr></th>
+              <th> <abbr title="sodium">Sodium</abbr></th>
+              <th> <abbr title="carbs">Carbs</abbr></th>
+              <th> <abbr title="protein">Protein</abbr></th>
+              <th> <abbr title="fat">Fat</abbr></th>
+              ------>
+            </tr>
+          </thead>
           
-          <th><abbr title="meal_id">Meal Id</abbr></th>
-          <th> <abbr title="meal_name">Meal Name</abbr></th>
-          <th><abbr title="meal_category"></abbr>Meal Category</abbr></th>
-          <th> <abbr title="macro_id">Macro Id</abbr></th>
-          <th> <abbr title="calories">Calories</abbr></th>
-          <th> <abbr title="serving_size">Serving Size</abbr></th>
-          <th> <abbr title="Cholesterol">Cholesterol</abbr></th>
-          <th> <abbr title="sodium">Sodium</abbr></th>
-          <th> <abbr title="carbs">Carbs</abbr></th>
-          <th> <abbr title="protein">Protein</abbr></th>
-          <th> <abbr title="fat">Fat</abbr></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-      
-      </tbody>
+          <tbody>
+          
+          </tbody>
 
-    </table>
+        </table>
+    </div>
     <script src="scripts.js"></script>   
 </body>
 </html>
